@@ -19,6 +19,12 @@
         <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
     <![endif]-->
 
+    <!-- Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Oranienbaum');
+    </style>
+    <!-- End fonts -->
+
     <?php get_template_part('parts/og-tags'); ?>
     <?php get_template_part('parts/schema'); ?>
     <?php wp_head();?>

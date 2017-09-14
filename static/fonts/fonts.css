@@ -24,3 +24,9 @@
         900 - Black (Heavy)
 */
 
+@font-face {
+   font-family: 'Aleo';
+   src: url('Aleo-LightItalic.woff') format('woff');
+   font-style: normal;
+   font-weight: 400;
+}
