@@ -1,6 +1,6 @@
 <template>
 
-    <main>
+    <main :style="{ 'background-image': `url(${bgImage})` }">
 
         <div class="title">
             <h1>{{ pageTitle }}</h1>
@@ -46,6 +46,9 @@ export default {
         },
         children(){
             return this.getValue('children')
+        },
+        bgImage(){
+            return this.getValue('featuredImage.sizes.fullscreen.url')
         }
     }
 }
@@ -56,6 +59,8 @@ export default {
 
 main {
     min-height: 100vh;
+    background-size: cover;
+    background-position: center;
 }
 .title {
     text-align: right;
