@@ -44,5 +44,8 @@ body {
     min-height: 100vh;
     background-color: #999;
 }
+.main {
+    min-height: 100vh;
+}
 
 </style>
