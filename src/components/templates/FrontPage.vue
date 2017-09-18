@@ -9,11 +9,11 @@
 
         <nav>
             <router-link
-                v-for="(child, i) in children"
+                v-for="(sibling, i) in siblings"
                 :key="i"
-                :to="child.relativePath">
+                :to="sibling.relativePath">
 
-                <h2>{{ child.title }}</h2>
+                <h2>{{ sibling.title }}</h2>
                 <div></div>
 
             </router-link>
@@ -27,11 +27,6 @@
 import clipboard from 'src/icons/clipboard.svg'
 
 export default {
-    methods: {
-        getValue(val){
-            return _.get(this, '$store.state.queryData.data[0].' + val)
-        }
-    },
     data(){
         return {
             clipboard
@@ -39,16 +34,16 @@ export default {
     },
     computed: {
         pageTitle(){
-            return this.getValue('title')
+            return this.$root.getValue('title')
         },
         slogan(){
-            return this.getValue('excerpt')
+            return this.$root.getValue('excerpt')
         },
-        children(){
-            return this.getValue('children')
+        siblings(){
+            return this.$root.getValue('siblings')
         },
         bgImage(){
-            return this.getValue('featuredImage.sizes.fullscreen.url')
+            return this.$root.getValue('featuredImage.sizes.fullscreen.url')
         }
     }
 }

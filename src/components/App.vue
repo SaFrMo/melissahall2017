@@ -32,6 +32,11 @@
                 return this.winWidth >= 750 ? 'desktop' : 'mobile'
             }
         },
+        methods: {
+            getValue(val){
+                return _.get(this, '$store.state.queryData.data[0].' + val)
+            }
+        },
         store,
         router
     }

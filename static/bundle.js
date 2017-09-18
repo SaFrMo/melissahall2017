@@ -13436,6 +13436,11 @@ exports.default = {
             return this.winWidth >= 750 ? 'desktop' : 'mobile';
         }
     },
+    methods: {
+        getValue: function getValue(val) {
+            return _.get(this, '$store.state.queryData.data[0].' + val);
+        }
+    },
     store: _store2.default,
     router: _router2.default
 }; //
@@ -13598,11 +13603,6 @@ var _clipboard2 = _interopRequireDefault(_clipboard);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-    methods: {
-        getValue: function getValue(val) {
-            return _.get(this, '$store.state.queryData.data[0].' + val);
-        }
-    },
     data: function data() {
         return {
             clipboard: _clipboard2.default
@@ -13611,16 +13611,16 @@ exports.default = {
 
     computed: {
         pageTitle: function pageTitle() {
-            return this.getValue('title');
+            return this.$root.getValue('title');
         },
         slogan: function slogan() {
-            return this.getValue('excerpt');
+            return this.$root.getValue('excerpt');
         },
-        children: function children() {
-            return this.getValue('children');
+        siblings: function siblings() {
+            return this.$root.getValue('siblings');
         },
         bgImage: function bgImage() {
-            return this.getValue('featuredImage.sizes.fullscreen.url');
+            return this.$root.getValue('featuredImage.sizes.fullscreen.url');
         }
     }
 }; //
@@ -13873,7 +13873,7 @@ exports = module.exports = __webpack_require__(8)();
 
 
 // module
-exports.push([module.i, "\nbody {\n    margin: 0;\n    min-height: 100vh;\n    background-color: #999;\n}\n.main {\n    min-height: 100vh;\n}\n\n", "", {"version":3,"sources":["/Users/sander/Local Sites/melissa-hall/app/public/wp-content/themes/melissahall2017/src/components/App.vue?6552b095"],"names":[],"mappings":";AAyCA;IACA,UAAA;IACA,kBAAA;IACA,uBAAA;CACA;AACA;IACA,kBAAA;CACA","file":"App.vue","sourcesContent":["<template>\n    <div :class=\"['main', `breakpoint-${ breakpoint }`]\">\n\n        <router-view></router-view>\n\n    </div>\n</template>\n\n<script>\n    import { sizer, scroller } from 'src/morlock'\n    import router from 'src/router'\n    import store from 'src/store'\n\n    export default {\n        el: '#app',\n        data () {\n            return {\n                winHeight: window.innerHeight,\n                winWidth: window.innerWidth,\n                sTop: 0\n            }\n        },\n        created () {\n            sizer.on('resize', e => {\n                this.winWidth = e[0]\n                this.winHeight = e[1]\n            })\n            scroller.on('scroll', top => this.sTop = top)\n        },\n        computed: {\n            breakpoint () {\n                return this.winWidth >= 750 ? 'desktop' : 'mobile'\n            }\n        },\n        store,\n        router\n    }\n</script>\n\n<style>\n\nbody {\n    margin: 0;\n    min-height: 100vh;\n    background-color: #999;\n}\n.main {\n    min-height: 100vh;\n}\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\nbody {\n    margin: 0;\n    min-height: 100vh;\n    background-color: #999;\n}\n.main {\n    min-height: 100vh;\n}\n\n", "", {"version":3,"sources":["/Users/sander/Local Sites/melissa-hall/app/public/wp-content/themes/melissahall2017/src/components/App.vue?04e9e31c"],"names":[],"mappings":";AA8CA;IACA,UAAA;IACA,kBAAA;IACA,uBAAA;CACA;AACA;IACA,kBAAA;CACA","file":"App.vue","sourcesContent":["<template>\n    <div :class=\"['main', `breakpoint-${ breakpoint }`]\">\n\n        <router-view></router-view>\n\n    </div>\n</template>\n\n<script>\n    import { sizer, scroller } from 'src/morlock'\n    import router from 'src/router'\n    import store from 'src/store'\n\n    export default {\n        el: '#app',\n        data () {\n            return {\n                winHeight: window.innerHeight,\n                winWidth: window.innerWidth,\n                sTop: 0\n            }\n        },\n        created () {\n            sizer.on('resize', e => {\n                this.winWidth = e[0]\n                this.winHeight = e[1]\n            })\n            scroller.on('scroll', top => this.sTop = top)\n        },\n        computed: {\n            breakpoint () {\n                return this.winWidth >= 750 ? 'desktop' : 'mobile'\n            }\n        },\n        methods: {\n            getValue(val){\n                return _.get(this, '$store.state.queryData.data[0].' + val)\n            }\n        },\n        store,\n        router\n    }\n</script>\n\n<style>\n\nbody {\n    margin: 0;\n    min-height: 100vh;\n    background-color: #999;\n}\n.main {\n    min-height: 100vh;\n}\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -47425,11 +47425,15 @@ module.exports = Component.exports
 /* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(79)
+
 var Component = __webpack_require__(2)(
   /* script */
   null,
   /* template */
-  null,
+  __webpack_require__(77),
   /* scopeId */
   null,
   /* cssModules */
@@ -47437,6 +47441,20 @@ var Component = __webpack_require__(2)(
 )
 Component.options.__file = "/Users/sander/Local Sites/melissa-hall/app/public/wp-content/themes/melissahall2017/src/components/templates/Platform.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Platform.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-579537da", Component.options)
+  } else {
+    hotAPI.reload("data-v-579537da", Component.options)
+  }
+})()}
 
 module.exports = Component.exports
 
@@ -47571,13 +47589,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })
   }, [_c('div', {
     staticClass: "title"
-  }, [_c('h1', [_vm._v(_vm._s(_vm.pageTitle))]), _vm._v(" "), _c('h2', [_vm._v(_vm._s(_vm.slogan))])]), _vm._v(" "), _c('nav', _vm._l((_vm.children), function(child, i) {
+  }, [_c('h1', [_vm._v(_vm._s(_vm.pageTitle))]), _vm._v(" "), _c('h2', [_vm._v(_vm._s(_vm.slogan))])]), _vm._v(" "), _c('nav', _vm._l((_vm.siblings), function(sibling, i) {
     return _c('router-link', {
       key: i,
       attrs: {
-        "to": child.relativePath
+        "to": sibling.relativePath
       }
-    }, [_c('h2', [_vm._v(_vm._s(child.title))]), _vm._v(" "), _c('div')])
+    }, [_c('h2', [_vm._v(_vm._s(sibling.title))]), _vm._v(" "), _c('div')])
   }))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -51202,6 +51220,69 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = 72;
+
+/***/ }),
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('main', [_c('article', {
+    attrs: {
+      "v-html": _vm.$root.getValue('content')
+    }
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-579537da", module.exports)
+  }
+}
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(78);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(17)("4649c1cc", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-579537da\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Platform.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-579537da\",\"scoped\":false,\"hasInlineConfig\":false}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Platform.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);
