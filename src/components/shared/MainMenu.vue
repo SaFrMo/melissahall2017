@@ -67,6 +67,10 @@ nav {
         margin-right: 10px;
         position: relative;
 
+        &:focus {
+            outline: none;
+        }
+
         &:after {
             content: '';
             position: absolute;
@@ -78,7 +82,7 @@ nav {
             transition: right 0.4s;
         }
 
-        &:hover:after, &:active:after {
+        &:hover:after, &:focus:after {
             right: 0;
         }
     }
