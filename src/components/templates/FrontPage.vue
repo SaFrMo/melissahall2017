@@ -1,25 +1,25 @@
 <template>
 
-    <main :style="{ 'background-image': `url(${bgImage})` }">
-
+    <section class="front-page">
         <div class="title">
             <h1>{{ pageTitle }}</h1>
             <h2>{{ slogan }}</h2>
         </div>
 
         <nav>
-            <router-link
+            <a
                 v-for="(sibling, i) in siblings"
                 :key="i"
-                :to="sibling.relativePath">
+                :href="sibling.relativePath"
+                @click.prevent="clickLink($event)">
 
                 <h2>{{ sibling.title }}</h2>
                 <div></div>
 
-            </router-link>
+            </a>
         </nav>
 
-    </main>
+    </section>
 
 </template>
 
@@ -41,9 +41,29 @@ export default {
         },
         siblings(){
             return this.$root.getValue('siblings')
-        },
-        bgImage(){
-            return this.$root.getValue('featuredImage.sizes.fullscreen.url')
+        }
+    },
+    methods: {
+        clickLink(evt){
+            console.log(evt.currentTarget)
+
+            // copy dom element
+            const copy = evt.currentTarget.cloneNode(true)
+            copy.classList.add('copied')
+
+            // place copy at target position
+            copy.style.position = 'absolute';
+            const rect = evt.currentTarget.getBoundingClientRect()
+            copy.style.top = rect.top + 'px'
+            copy.style.left = rect.left + 200 + 'px'
+
+            // append to dom
+            const nav = document.querySelector('.front-page')
+            nav.appendChild(copy)
+
+            // animate to center of screen
+
+            // populate with content
         }
     }
 }
@@ -52,7 +72,7 @@ export default {
 
 <style scoped lang="scss">
 
-main {
+section {
     min-height: 100vh;
     background-size: cover;
     background-position: center;
@@ -85,47 +105,48 @@ nav {
     display: flex;
     justify-content: center;
     width: 100%;
+}
+nav a,
+.copied {
+    color: #000;
+    text-decoration: none;
+    font-family: 'Amaranth';
+    min-width: 250px;
+    width: calc(25% - 75px);
+    max-width: 300px;
+    text-align: center;
+    font-size: 24px;
+    transform: none;
+    transition: transform 0.4s;
 
-    a {
-        color: #000;
-        text-decoration: none;
-        font-family: 'Amaranth';
-        min-width: 250px;
-        width: calc(25% - 75px);
-        max-width: 300px;
-        text-align: center;
-        font-size: 24px;
-        transform: none;
-        transition: transform 0.4s;
+    $highlight-color: #35b729;
+    $main-color: #99e265;
 
-        $highlight-color: #35b729;
-        $main-color: #99e265;
+    h2 {
+        background-color: $highlight-color;
+        padding: 25px 0;
+        margin: 0;
+        transition: background-color 0.4s
+    }
+    div {
+        background-color: $main-color;
+        height: 0;
+        padding-bottom: 100%;
+        transition: background-color 0.4s
+    }
+
+    &:hover, &:focus {
+        transform: translateY(-30px);
 
         h2 {
-            background-color: $highlight-color;
-            padding: 25px 0;
-            margin: 0;
-            transition: background-color 0.4s
+            background-color: lighten($highlight-color, 10%);
         }
         div {
-            background-color: $main-color;
-            height: 0;
-            padding-bottom: 100%;
-            transition: background-color 0.4s
-        }
-
-        &:hover, &:focus {
-            transform: translateY(-30px);
-
-            h2 {
-                background-color: lighten($highlight-color, 10%);
-            }
-            div {
-                background-color: lighten($main-color, 10%);
-            }
+            background-color: lighten($main-color, 10%);
         }
     }
-    a + a {
+
+    & + a {
         margin-left: 45px;
     }
 }

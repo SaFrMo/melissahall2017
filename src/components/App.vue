@@ -1,11 +1,9 @@
 <template>
-    <div :class="['main', `breakpoint-${ breakpoint }`]">
+    <main :class="[`breakpoint-${ breakpoint }`]" :style="{ 'background-image': `url(${bgImage})` }">
 
-        <transition name="fade" mode="out-in">
-            <router-view></router-view>
-        </transition>
+        <router-view></router-view>
 
-    </div>
+    </main>
 </template>
 
 <script>
@@ -32,6 +30,9 @@
         computed: {
             breakpoint () {
                 return this.winWidth >= 750 ? 'desktop' : 'mobile'
+            },
+            bgImage(){
+                return this.getValue('featuredImage.sizes.fullscreen.url')
             }
         },
         methods: {
@@ -49,16 +50,11 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background-color: #999;
 }
-.main {
+main {
     min-height: 100vh;
-}
-.fade-enter-active, .fade-leave-active {
-    transition: opacity 0.4s;
-}
-.fade-enter, .fade-leave-to {
-    opacity: 0;
+    background-position: center;
+    background-size: cover;
 }
 
 </style>

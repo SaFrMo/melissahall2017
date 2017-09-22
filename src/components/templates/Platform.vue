@@ -1,23 +1,19 @@
 <template>
 
-    <main>
+    <section>
 
         <main-menu/>
 
-        <article v-html="getValue('content')"></article>
+        <article v-html="$root.getValue('content')"></article>
 
-    </main>
+    </section>
 
 </template>
 
 <script>
 
 export default {
-    methods: {
-        getValue(val){
-            return _.get(this, '$store.state.queryData.data[0].' + val)
-        }
-    }
+    
 }
 
 </script>

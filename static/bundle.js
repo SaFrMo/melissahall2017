@@ -13472,6 +13472,9 @@ exports.default = {
     computed: {
         breakpoint: function breakpoint() {
             return this.winWidth >= 750 ? 'desktop' : 'mobile';
+        },
+        bgImage: function bgImage() {
+            return this.getValue('featuredImage.sizes.fullscreen.url');
         }
     },
     methods: {
@@ -13482,8 +13485,6 @@ exports.default = {
     store: _store2.default,
     router: _router2.default
 }; //
-//
-//
 //
 //
 //
@@ -13700,9 +13701,29 @@ exports.default = {
         },
         siblings: function siblings() {
             return this.$root.getValue('siblings');
-        },
-        bgImage: function bgImage() {
-            return this.$root.getValue('featuredImage.sizes.fullscreen.url');
+        }
+    },
+    methods: {
+        clickLink: function clickLink(evt) {
+            console.log(evt.currentTarget);
+
+            // copy dom element
+            var copy = evt.currentTarget.cloneNode(true);
+            copy.classList.add('copied');
+
+            // place copy at target position
+            copy.style.position = 'absolute';
+            var rect = evt.currentTarget.getBoundingClientRect();
+            copy.style.top = rect.top + 'px';
+            copy.style.left = rect.left + 200 + 'px';
+
+            // append to dom
+            var nav = document.querySelector('.front-page');
+            nav.appendChild(copy);
+
+            // animate to center of screen
+
+            // populate with content
         }
     }
 }; //
@@ -13755,13 +13776,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 
-exports.default = {
-    methods: {
-        getValue: function getValue(val) {
-            return _.get(this, '$store.state.queryData.data[0].' + val);
-        }
-    }
-};
+exports.default = {};
 
 /***/ }),
 /* 35 */
@@ -13964,7 +13979,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "\nmain[data-v-11b65530] {\n  min-height: 100vh;\n  background-size: cover;\n  background-position: center;\n}\n.title[data-v-11b65530] {\n  text-align: right;\n  width: calc(100% * 2 / 3);\n  background-color: #fff;\n  padding: 50px;\n  box-sizing: border-box;\n  min-height: 40vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n.title h1[data-v-11b65530] {\n    margin: 0;\n    font-family: 'Oranienbaum';\n    text-transform: uppercase;\n    font-weight: 200;\n    font-size: 72px;\n}\n.title h2[data-v-11b65530] {\n    font-family: 'Aleo';\n}\nnav[data-v-11b65530] {\n  position: absolute;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 100%;\n}\nnav a[data-v-11b65530] {\n    color: #000;\n    text-decoration: none;\n    font-family: 'Amaranth';\n    min-width: 250px;\n    width: calc(25% - 75px);\n    max-width: 300px;\n    text-align: center;\n    font-size: 24px;\n    -webkit-transform: none;\n            transform: none;\n    transition: -webkit-transform 0.4s;\n    transition: transform 0.4s;\n    transition: transform 0.4s, -webkit-transform 0.4s;\n}\nnav a h2[data-v-11b65530] {\n      background-color: #35b729;\n      padding: 25px 0;\n      margin: 0;\n      transition: background-color 0.4s;\n}\nnav a div[data-v-11b65530] {\n      background-color: #99e265;\n      height: 0;\n      padding-bottom: 100%;\n      transition: background-color 0.4s;\n}\nnav a[data-v-11b65530]:hover, nav a[data-v-11b65530]:focus {\n      -webkit-transform: translateY(-30px);\n              transform: translateY(-30px);\n}\nnav a:hover h2[data-v-11b65530], nav a:focus h2[data-v-11b65530] {\n        background-color: #4cd43f;\n}\nnav a:hover div[data-v-11b65530], nav a:focus div[data-v-11b65530] {\n        background-color: #b5ea90;\n}\nnav a + a[data-v-11b65530] {\n    margin-left: 45px;\n}\n", ""]);
+exports.push([module.i, "\nsection[data-v-11b65530] {\n  min-height: 100vh;\n  background-size: cover;\n  background-position: center;\n}\n.title[data-v-11b65530] {\n  text-align: right;\n  width: calc(100% * 2 / 3);\n  background-color: #fff;\n  padding: 50px;\n  box-sizing: border-box;\n  min-height: 40vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n.title h1[data-v-11b65530] {\n    margin: 0;\n    font-family: 'Oranienbaum';\n    text-transform: uppercase;\n    font-weight: 200;\n    font-size: 72px;\n}\n.title h2[data-v-11b65530] {\n    font-family: 'Aleo';\n}\nnav[data-v-11b65530] {\n  position: absolute;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 100%;\n}\nnav a[data-v-11b65530],\n.copied[data-v-11b65530] {\n  color: #000;\n  text-decoration: none;\n  font-family: 'Amaranth';\n  min-width: 250px;\n  width: calc(25% - 75px);\n  max-width: 300px;\n  text-align: center;\n  font-size: 24px;\n  -webkit-transform: none;\n          transform: none;\n  transition: -webkit-transform 0.4s;\n  transition: transform 0.4s;\n  transition: transform 0.4s, -webkit-transform 0.4s;\n}\nnav a h2[data-v-11b65530],\n  .copied h2[data-v-11b65530] {\n    background-color: #35b729;\n    padding: 25px 0;\n    margin: 0;\n    transition: background-color 0.4s;\n}\nnav a div[data-v-11b65530],\n  .copied div[data-v-11b65530] {\n    background-color: #99e265;\n    height: 0;\n    padding-bottom: 100%;\n    transition: background-color 0.4s;\n}\nnav a[data-v-11b65530]:hover, nav a[data-v-11b65530]:focus,\n  .copied[data-v-11b65530]:hover,\n  .copied[data-v-11b65530]:focus {\n    -webkit-transform: translateY(-30px);\n            transform: translateY(-30px);\n}\nnav a:hover h2[data-v-11b65530], nav a:focus h2[data-v-11b65530],\n    .copied:hover h2[data-v-11b65530],\n    .copied:focus h2[data-v-11b65530] {\n      background-color: #4cd43f;\n}\nnav a:hover div[data-v-11b65530], nav a:focus div[data-v-11b65530],\n    .copied:hover div[data-v-11b65530],\n    .copied:focus div[data-v-11b65530] {\n      background-color: #b5ea90;\n}\nnav a + a[data-v-11b65530],\n  .copied + a[data-v-11b65530] {\n    margin-left: 45px;\n}\n", ""]);
 
 // exports
 
@@ -14020,7 +14035,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "\nbody {\n    margin: 0;\n    min-height: 100vh;\n    background-color: #999;\n}\n.main {\n    min-height: 100vh;\n}\n.fade-enter-active, .fade-leave-active {\n    transition: opacity 0.4s;\n}\n.fade-enter, .fade-leave-to {\n    opacity: 0;\n}\n\n", "", {"version":3,"sources":["/Users/sander/Local Sites/melissa-hall/app/public/wp-content/themes/melissahall2017/src/components/App.vue?61f7c79b"],"names":[],"mappings":";AAgDA;IACA,UAAA;IACA,kBAAA;IACA,uBAAA;CACA;AACA;IACA,kBAAA;CACA;AACA;IACA,yBAAA;CACA;AACA;IACA,WAAA;CACA","file":"App.vue","sourcesContent":["<template>\n    <div :class=\"['main', `breakpoint-${ breakpoint }`]\">\n\n        <transition name=\"fade\" mode=\"out-in\">\n            <router-view></router-view>\n        </transition>\n\n    </div>\n</template>\n\n<script>\n    import { sizer, scroller } from 'src/morlock'\n    import router from 'src/router'\n    import store from 'src/store'\n\n    export default {\n        el: '#app',\n        data () {\n            return {\n                winHeight: window.innerHeight,\n                winWidth: window.innerWidth,\n                sTop: 0\n            }\n        },\n        created () {\n            sizer.on('resize', e => {\n                this.winWidth = e[0]\n                this.winHeight = e[1]\n            })\n            scroller.on('scroll', top => this.sTop = top)\n        },\n        computed: {\n            breakpoint () {\n                return this.winWidth >= 750 ? 'desktop' : 'mobile'\n            }\n        },\n        methods: {\n            getValue(val){\n                return _.get(this, '$store.state.queryData.data[0].' + val)\n            }\n        },\n        store,\n        router\n    }\n</script>\n\n<style>\n\nbody {\n    margin: 0;\n    min-height: 100vh;\n    background-color: #999;\n}\n.main {\n    min-height: 100vh;\n}\n.fade-enter-active, .fade-leave-active {\n    transition: opacity 0.4s;\n}\n.fade-enter, .fade-leave-to {\n    opacity: 0;\n}\n\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\nbody {\n    margin: 0;\n    min-height: 100vh;\n}\nmain {\n    min-height: 100vh;\n    background-position: center;\n    background-size: cover;\n}\n\n", "", {"version":3,"sources":["/Users/sander/Local Sites/melissa-hall/app/public/wp-content/themes/melissahall2017/src/components/App.vue?b2d32a80"],"names":[],"mappings":";AAiDA;IACA,UAAA;IACA,kBAAA;CACA;AACA;IACA,kBAAA;IACA,4BAAA;IACA,uBAAA;CACA","file":"App.vue","sourcesContent":["<template>\n    <main :class=\"[`breakpoint-${ breakpoint }`]\" :style=\"{ 'background-image': `url(${bgImage})` }\">\n\n        <router-view></router-view>\n\n    </main>\n</template>\n\n<script>\n    import { sizer, scroller } from 'src/morlock'\n    import router from 'src/router'\n    import store from 'src/store'\n\n    export default {\n        el: '#app',\n        data () {\n            return {\n                winHeight: window.innerHeight,\n                winWidth: window.innerWidth,\n                sTop: 0\n            }\n        },\n        created () {\n            sizer.on('resize', e => {\n                this.winWidth = e[0]\n                this.winHeight = e[1]\n            })\n            scroller.on('scroll', top => this.sTop = top)\n        },\n        computed: {\n            breakpoint () {\n                return this.winWidth >= 750 ? 'desktop' : 'mobile'\n            },\n            bgImage(){\n                return this.getValue('featuredImage.sizes.fullscreen.url')\n            }\n        },\n        methods: {\n            getValue(val){\n                return _.get(this, '$store.state.queryData.data[0].' + val)\n            }\n        },\n        store,\n        router\n    }\n</script>\n\n<style>\n\nbody {\n    margin: 0;\n    min-height: 100vh;\n}\nmain {\n    min-height: 100vh;\n    background-position: center;\n    background-size: cover;\n}\n\n</style>\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -47730,17 +47745,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('main', {
-    style: ({
-      'background-image': ("url(" + _vm.bgImage + ")")
-    })
+  return _c('section', {
+    staticClass: "front-page"
   }, [_c('div', {
     staticClass: "title"
   }, [_c('h1', [_vm._v(_vm._s(_vm.pageTitle))]), _vm._v(" "), _c('h2', [_vm._v(_vm._s(_vm.slogan))])]), _vm._v(" "), _c('nav', _vm._l((_vm.siblings), function(sibling, i) {
-    return _c('router-link', {
+    return _c('a', {
       key: i,
       attrs: {
-        "to": sibling.relativePath
+        "href": sibling.relativePath
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.clickLink($event)
+        }
       }
     }, [_c('h2', [_vm._v(_vm._s(sibling.title))]), _vm._v(" "), _c('div')])
   }))])
@@ -47833,9 +47852,9 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('main', [_c('main-menu'), _vm._v(" "), _c('article', {
+  return _c('section', [_c('main-menu'), _vm._v(" "), _c('article', {
     domProps: {
-      "innerHTML": _vm._s(_vm.getValue('content'))
+      "innerHTML": _vm._s(_vm.$root.getValue('content'))
     }
   })], 1)
 },staticRenderFns: []}
@@ -47898,14 +47917,12 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    class: ['main', ("breakpoint-" + _vm.breakpoint)]
-  }, [_c('transition', {
-    attrs: {
-      "name": "fade",
-      "mode": "out-in"
-    }
-  }, [_c('router-view')], 1)], 1)
+  return _c('main', {
+    class: [("breakpoint-" + _vm.breakpoint)],
+    style: ({
+      'background-image': ("url(" + _vm.bgImage + ")")
+    })
+  }, [_c('router-view')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
