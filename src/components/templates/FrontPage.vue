@@ -44,26 +44,34 @@ export default {
         }
     },
     methods: {
-        clickLink(evt){
-            console.log(evt.currentTarget)
-
+        async clickLink(evt){
             // copy dom element
             const copy = evt.currentTarget.cloneNode(true)
             copy.classList.add('copied')
+            copy.setAttribute('href', '#')
 
             // place copy at target position
             copy.style.position = 'absolute';
             const rect = evt.currentTarget.getBoundingClientRect()
             copy.style.top = rect.top + 'px'
-            copy.style.left = rect.left + 200 + 'px'
+            copy.style.left = rect.left + 'px'
 
             // append to dom
             const nav = document.querySelector('.front-page')
             nav.appendChild(copy)
 
-            // animate to center of screen
+            // animate
+            setTimeout(function(){
+                copy.classList.add('centered')
+            }, 50)
 
-            // populate with content
+            // start loading content
+            const url = evt.currentTarget.getAttribute('href')
+            const headers = new Headers()
+            headers.append('Content-Type', 'application/json')
+            const json = await fetch( url, { headers } ).then(res => { return res.json() })
+
+            console.log(json)
         }
     }
 }
@@ -148,6 +156,13 @@ nav a,
 
     & + a {
         margin-left: 45px;
+    }
+
+    &.centered {
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%);
+        transition: top 0.7s, left 0.7s, transform 0.7s;
     }
 }
 
