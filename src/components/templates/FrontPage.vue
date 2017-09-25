@@ -7,16 +7,15 @@
         </div>
 
         <nav>
-            <a
+            <router-link
                 v-for="(sibling, i) in siblings"
                 :key="i"
-                :href="sibling.relativePath"
-                @click.prevent="clickLink($event)">
+                :to="sibling.relativePath">
 
                 <h2>{{ sibling.title }}</h2>
                 <div></div>
 
-            </a>
+            </router-link>
         </nav>
 
     </section>
@@ -71,7 +70,10 @@ export default {
             headers.append('Content-Type', 'application/json')
             const json = await fetch( url, { headers } ).then(res => { return res.json() })
 
-            console.log(json)
+            // replace content
+            setTimeout(() => {
+                this.$store.commit('REPLACE_QUERYDATA', json)
+            }, 700);
         }
     }
 }
@@ -159,11 +161,19 @@ nav a,
     }
 
     &.centered {
-        top: 50% !important;
+        top: 0 !important;
         left: 50% !important;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
         transition: top 0.7s, left 0.7s, transform 0.7s;
     }
+}
+
+.copied.centered {
+    margin: 90px auto;
+    background-color: #fff;
+    max-width: 400px;
+    padding: 50px 20px;
+    line-height: 1.6;
 }
 
 

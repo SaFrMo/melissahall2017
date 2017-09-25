@@ -1,7 +1,9 @@
 <template>
     <main :class="[`breakpoint-${ breakpoint }`]" :style="{ 'background-image': `url(${bgImage})` }">
 
-        <router-view></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
 
     </main>
 </template>
@@ -55,6 +57,12 @@ main {
     min-height: 100vh;
     background-position: center;
     background-size: cover;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.4s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
 }
 
 </style>
