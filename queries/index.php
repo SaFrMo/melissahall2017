@@ -21,9 +21,9 @@
 
             // Per-site
             '/' . get_page(5)->post_name            => 'Platform',
-            '/' . get_page(6)->post_name            => 'Bio',
-            '/' . get_page(7)->post_name            => 'Talk',
-            '/' . get_page(8)->post_name            => 'Donate',
+            '/' . get_page(6)->post_name            => 'Platform',
+            '/' . get_page(7)->post_name            => 'Platform',
+            '/' . get_page(8)->post_name            => 'Platform',
             // '/path'                              => 'VueComponent',
             // '/path/:var'                         => 'ComponentWithVar'
             // '/path/*/:var'                       => 'WildcardAndVar'
