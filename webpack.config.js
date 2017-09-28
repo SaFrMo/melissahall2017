@@ -41,7 +41,7 @@ const config = {
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000'
+                loader: 'url-loader?limit=1000000'
             }
         ]
     },
