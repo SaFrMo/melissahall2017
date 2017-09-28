@@ -25,7 +25,7 @@
         name: 'main-menu',
         computed: {
             menuItems () {
-                return _.get(this, '$store.state.queryData.shared.mainMenu.items') || []
+                return this.$store.state.site.menus[0].items || []
             }
         }
     }

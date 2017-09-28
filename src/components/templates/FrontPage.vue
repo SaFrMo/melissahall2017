@@ -39,41 +39,7 @@ export default {
             return this.$root.getValue('excerpt')
         },
         siblings(){
-            return this.$root.getValue('siblings')
-        }
-    },
-    methods: {
-        async clickLink(evt){
-            // copy dom element
-            const copy = evt.currentTarget.cloneNode(true)
-            copy.classList.add('copied')
-            copy.setAttribute('href', '#')
-
-            // place copy at target position
-            copy.style.position = 'absolute';
-            const rect = evt.currentTarget.getBoundingClientRect()
-            copy.style.top = rect.top + 'px'
-            copy.style.left = rect.left + 'px'
-
-            // append to dom
-            const nav = document.querySelector('.front-page')
-            nav.appendChild(copy)
-
-            // animate
-            setTimeout(function(){
-                copy.classList.add('centered')
-            }, 50)
-
-            // start loading content
-            const url = evt.currentTarget.getAttribute('href')
-            const headers = new Headers()
-            headers.append('Content-Type', 'application/json')
-            const json = await fetch( url, { headers } ).then(res => { return res.json() })
-
-            // replace content
-            setTimeout(() => {
-                this.$store.commit('REPLACE_QUERYDATA', json)
-            }, 700);
+            return this.$root.getValue('related.siblings')
         }
     }
 }

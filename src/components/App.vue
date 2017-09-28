@@ -9,12 +9,15 @@
 </template>
 
 <script>
-    import { sizer, scroller } from 'src/morlock'
+    import throttle from 'lodash/throttle'
     import router from 'src/router'
     import store from 'src/store'
+    import _get from 'lodash.get'
 
     export default {
         el: '#app',
+        store,
+        router,
         data () {
             return {
                 winHeight: window.innerHeight,
@@ -22,12 +25,21 @@
                 sTop: 0
             }
         },
-        created () {
-            sizer.on('resize', e => {
-                this.winWidth = e[0]
-                this.winHeight = e[1]
-            })
-            scroller.on('scroll', top => this.sTop = top)
+        mounted () {
+            window.addEventListener('resize', throttle(this.setWinSize, 30))
+            window.addEventListener('scroll', throttle(this.setWinScroll, 10))
+        },
+        methods: {
+            setWinSize () {
+                this.winWidth = window.innerWidth
+                this.winHeight = window.innerHeight
+            },
+            setWinScroll () {
+                this.sTop = document.body.scrollTop
+            },
+            getValue(val){
+                return _get(this, '$store.state.page[0]' + val)
+            }
         },
         computed: {
             breakpoint () {
@@ -36,14 +48,7 @@
             bgImage(){
                 return this.getValue('featuredImage.sizes.fullscreen.url')
             }
-        },
-        methods: {
-            getValue(val){
-                return _.get(this, '$store.state.queryData.data[0].' + val)
-            }
-        },
-        store,
-        router
+        }
     }
 </script>
 

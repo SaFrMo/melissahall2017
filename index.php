@@ -4,26 +4,29 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>" />
     <title><?php bloginfo('name'); ?><?php wp_title(); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <?php if( is_front_page() ) : ?>
-        <meta name="description" content="<?php bloginfo('description'); ?>">
-    <?php endif; ?>
 
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_template_directory_uri(); ?>/static/bundle.css?ver=1.0" />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/static/images/favicon.png" />
     <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/static/images/icon-touch.png"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google:{
+                families: ['Open Sans', 'Oranienbaum']
+            },
+            custom: {
+                families: ['Aleo', 'Amaranth'],
+                urls: ['<?php echo get_template_directory_uri(); ?>/static/fonts.css']
+            }
+        });
+    </script>
 
     <!--Make Microsoft Internet Explorer behave like a standards-compliant browser. http://code.google.com/p/ie7-js/-->
     <!--[if lt IE 9]>
         <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
     <![endif]-->
-
-    <!-- Fonts -->
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Oranienbaum');
-    </style>
-    <!-- End fonts -->
 
     <?php get_template_part('parts/og-tags'); ?>
     <?php get_template_part('parts/schema'); ?>

@@ -1,0 +1,12 @@
+@font-face {
+   font-family: 'Aleo';
+   src: url(Aleo-LightItalic.woff) format('woff');
+   font-style: normal;
+   font-weight: 400;
+}
+@font-face {
+   font-family: 'Amaranth';
+   src: url(amaranth-regular-webfont.woff) format('woff');
+   font-style: normal;
+   font-weight: 400;
+}
