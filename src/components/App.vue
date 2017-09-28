@@ -46,7 +46,7 @@
                 return this.winWidth >= 750 ? 'desktop' : 'mobile'
             },
             bgImage(){
-                return this.getValue('featuredImage.sizes.fullscreen.url')
+                return this.getValue('related.featured_attachment.sizes.full.url')
             }
         }
     }
