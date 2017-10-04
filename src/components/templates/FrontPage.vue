@@ -3,6 +3,9 @@
     <section class="front-page">
         <div class="title">
             <h1>{{ pageTitle }}</h1>
+
+            <div class="entry" v-html="$store.state.page[0].content"></div>
+
             <h2>{{ slogan }}</h2>
         </div>
 
@@ -24,7 +27,6 @@
 
 <script>
 import clipboard from 'src/icons/clipboard.svg'
-import Zoomhaus from 'zoomhaus'
 
 export default {
     data(){

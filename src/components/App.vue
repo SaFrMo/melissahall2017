@@ -13,6 +13,7 @@
     import router from 'src/router'
     import store from 'src/store'
     import _get from 'lodash.get'
+    import Zoomhaus from 'zoomhaus'
 
     export default {
         el: '#app',
