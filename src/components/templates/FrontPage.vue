@@ -53,6 +53,10 @@ section {
     background-size: cover;
     background-position: center;
 }
+.breakpoint-mobile section {
+    display: flex;
+    flex-direction: column;
+}
 .title {
     text-align: right;
     width: calc(100% * 2 / 3);
@@ -75,19 +79,32 @@ section {
         font-family: 'Aleo';
     }
 }
+.breakpoint-mobile .title {
+    flex: 1;
+    width: 100vw;
+}
 nav {
     position: absolute;
+    right: 0;
     bottom: 0;
+    left: 0;
     display: flex;
-    justify-content: center;
-    width: 100%;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    margin: auto;
+}
+.breakpoint-mobile nav {
+    position: static;
+    flex-direction: column;
+    bottom: initial;
+    align-items: center;
 }
 nav a,
 .copied {
     color: #000;
     text-decoration: none;
     font-family: 'Amaranth';
-    min-width: 250px;
+    min-width: 200px;
     width: calc(25% - 75px);
     max-width: 300px;
     text-align: center;
@@ -122,16 +139,30 @@ nav a,
         }
     }
 
-    & + a {
-        margin-left: 45px;
-    }
-
     &.centered {
         top: 0 !important;
         left: 50% !important;
         transform: translateX(-50%);
         transition: top 0.7s, left 0.7s, transform 0.7s;
     }
+}
+
+.breakpoint-mobile nav a {
+    width: 100vw;
+    max-width: 100vw;
+
+    div {
+        padding-bottom: 0;
+    }
+
+    &:not(:last-child) div {
+        border-bottom: 2px solid #000;
+    }
+}
+
+.breakpoint-mobile nav a:hover,
+.breakpoint-mobile nav a:focus {
+    transform: translateY(0);
 }
 
 .copied.centered {

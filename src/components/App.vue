@@ -43,7 +43,7 @@
         },
         computed: {
             breakpoint () {
-                return this.winWidth >= 750 ? 'desktop' : 'mobile'
+                return this.winWidth >= 820 ? 'desktop' : 'mobile'
             },
             bgImage(){
                 return this.getValue('related.featured_attachment.sizes.full.url')
