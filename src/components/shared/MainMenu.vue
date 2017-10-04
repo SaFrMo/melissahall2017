@@ -50,6 +50,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
 
     transition: background-color 0.4s;
 
@@ -87,6 +88,11 @@ nav {
         }
     }
 
+}
+
+.breakpoint-mobile nav {
+    padding-top: 15px;
+    justify-content: center;
 }
 
 </style>

@@ -51,6 +51,7 @@
     "vue-template-compiler": "^2.2.2",
     "vuex": "^2.3.1",
     "webpack": "^2.2.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "zoomhaus": "^3.0.0"
   }
 }

@@ -24,12 +24,16 @@
 
 <script>
 import clipboard from 'src/icons/clipboard.svg'
+import Zoomhaus from 'zoomhaus'
 
 export default {
     data(){
         return {
             clipboard
         }
+    },
+    mounted(){
+        new Zoomhaus('img')
     },
     computed: {
         pageTitle(){
