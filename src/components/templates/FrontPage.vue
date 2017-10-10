@@ -9,7 +9,16 @@
             <h2>{{ slogan }}</h2>
         </div>
 
-        <nav>
+        <div class="spacer"></div>
+
+        <nav class="contact">
+            <ul>
+                <li><a href="https://www.facebook.com/fallcreekvoice/" target="_blank">Facebook</a></li>
+                <li><a href="mailto:melhall_274@hotmail.com">Email</a></li>
+            </ul>
+        </nav>
+
+        <nav class="main-links">
             <router-link
                 v-for="(sibling, i) in siblings"
                 :key="i"
@@ -58,8 +67,6 @@ section {
     min-height: 100vh;
     background-size: cover;
     background-position: center;
-}
-.breakpoint-mobile section {
     display: flex;
     flex-direction: column;
 }
@@ -86,26 +93,51 @@ section {
     }
 }
 .breakpoint-mobile .title {
-    flex: 1;
     width: 100vw;
+    padding-top: 150px;
+    flex: 1;
 }
-nav {
+.contact {
+    background-color: #fff;
     position: absolute;
+    top: 0;
     right: 0;
-    bottom: 0;
-    left: 0;
+    padding: 20px;
+
+    ul {
+        padding: 0 20px;
+    }
+
+    a {
+        color: #000;
+        font-family: 'Aleo';
+        text-decoration: none;
+        font-size: 20px;
+        line-height: 1.6;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+    }
+}
+.spacer {
+    flex: 1;
+}
+.breakpoint-mobile .spacer {
+    display: none;
+}
+.main-links {
     display: flex;
     justify-content: space-between;
     width: calc(100% - 40px);
-    margin: auto;
+    margin: 30px auto 0;
 }
-.breakpoint-mobile nav {
-    position: static;
+.breakpoint-mobile .main-links {
     flex-direction: column;
-    bottom: initial;
     align-items: center;
+    margin-top: 0;
 }
-nav a,
+.main-links a,
 .copied {
     color: #000;
     text-decoration: none;
@@ -153,7 +185,7 @@ nav a,
     }
 }
 
-.breakpoint-mobile nav a {
+.breakpoint-mobile .main-links a {
     width: 100vw;
     max-width: 100vw;
 
@@ -166,8 +198,8 @@ nav a,
     }
 }
 
-.breakpoint-mobile nav a:hover,
-.breakpoint-mobile nav a:focus {
+.breakpoint-mobile .main-links a:hover,
+.breakpoint-mobile .main-links a:focus {
     transform: translateY(0);
 }
 

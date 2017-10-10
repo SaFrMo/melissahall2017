@@ -83,7 +83,7 @@ nav {
             transition: right 0.4s;
         }
 
-        &:hover:after, &:focus:after {
+        &:hover:after, &:focus:after, &.router-link-exact-active:after {
             right: 0;
         }
     }
